@@ -13,6 +13,7 @@ var searchHistoryArray = searchHistory.split("?");
 searchHistoryArray.pop();
 
 // Loops through previously searched city and displays as an unordered list
+// Need to figure out how to remove duplicates!
 for (var x=0; x<searchHistoryArray.length; x++) {
     var cityString = searchHistoryArray[x];
     var cityParsed = JSON.parse(searchHistoryArray[x]);
@@ -65,7 +66,8 @@ function getApi(event) {
     fetch(geoRequestUrl)
     .then(function(response) {
 
-        // if the reponse is ok but no data is found
+        // If the reponse is ok but no data is found
+        // Need to figure out how to capture typos and errors
         if(!response.ok) {
             alert("Oops! Typo? Try Again?");
             location.reload();
