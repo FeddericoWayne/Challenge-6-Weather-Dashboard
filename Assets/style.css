@@ -1,0 +1,13 @@
+* {
+    font-family: monospace;
+    background-color: lightgray;
+}
+
+/* Warning */
+.alert {
+    background-color: pink;
+
+}
+input:focus {
+    background-color: white;
+}

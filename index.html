@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JQuery Link -->
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.js"
+    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+    <!-- Dayjs Link -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./Assets/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 id="title">WEATHER DASHBOARD</h1>
+            <h3 id="clock"></h3>
+        </div>
+    </header>
+    <div>
+        <label for="search-city">Enter City Name:</label>
+        <input type="text" id="search-city" placeholder="ex: New York City">
+        <label for="state">Enter State Code:</label>
+        <input type="text" id="state" placeholder="ex: NY">
+        <button id="search" class="btn">Get Weather</button>
+        <button id="refresh" class="btn">New City</button>
+    </div>
+    <div>
+        <h3 id="search-history-title">Search History</h3>
+        <ul id="search-history"></ul>
+    </div>
+    <div id="current-weather">
+        <h2 id="location"></h2>
+        <h3 id="today"></h3>
+        <img id="weather-icon">
+        <h3 id="condition"></h3>
+        <p id="temp"></p>
+        <p id="temp-max"></p>
+        <p id="temp-min"></p>
+        <p id="humidity"></p>
+        <p id="wind"></p>
+        
+        
+    </div>
+    <div id="forecast" class="forecast-container">
+        <h2 id="forecast-title"></h2>
+        <div id="forecast-1"></div>
+            <h3 id="date-1"></h3>
+            <img id="weather-icon-1">
+            <h3 id="condition-1"></h3>
+            <p id="temp-1"></p>
+            <p id="humidity-1"></p>
+            <p id="wind-1"></p>
+        </div>
+        <div id="forecast-2"></div>
+            <h3 id="date-2"></h3>
+            <img id="weather-icon-2">
+            <h3 id="condition-2"></h3>
+            <p id="temp-2"></p>
+            <p id="humidity-2"></p>
+            <p id="wind-2"></p>
+        </div>
+        <div id="forecast-3"></div>
+            <h3 id="date-3"></h3>
+            <img id="weather-icon-3">
+            <h3 id="condition-3"></h3>
+            <p id="temp-3"></p>
+            <p id="humidity-3"></p>
+            <p id="wind-3"></p>
+        </div>
+        <div id="forecast-4"></div>
+            <h3 id="date-4"></h3>
+            <img id="weather-icon-4">
+            <h3 id="condition-4"></h3>
+            <p id="temp-4"></p>
+            <p id="humidity-4"></p>
+            <p id="wind-4"></p>
+        </div>
+        <div id="forecast-5"></div>
+            <h3 id="date-5"></h3>
+            <img id="weather-icon-5">
+            <h3 id="condition-5"></h3>
+            <p id="temp-5"></p>
+            <p id="humidity-5"></p>
+            <p id="wind-5"></p>
+        </div>
+    </div>
+    
+
+    <script src="./Assets/script.js"></script>
+</body>
+</html>
