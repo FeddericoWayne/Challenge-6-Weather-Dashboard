@@ -3,11 +3,7 @@
     background-color: lightgray;
 }
 
-/* Warning */
-.alert {
-    background-color: pink;
-
-}
-input:focus {
-    background-color: white;
+/* Search history styling */
+.city {
+    list-style-type: none;
 }
