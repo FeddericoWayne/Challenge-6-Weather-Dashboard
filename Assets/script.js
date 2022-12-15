@@ -45,17 +45,19 @@ function getApi(event) {
     var latitude = "";
     var longitude = "";
     var date = dayjs().format('dddd, MMM DD');
-    
-    
 
-    // Alerts when user enters nothing
+    // Alerts when user enters nothin or missing state code
     if (!cityName && !stateCode) {
         alert("Please enter city and state!");
         
         return;
     }
 
-    
+    if (!stateCode) {
+        alert("Please enter state code!");
+
+        return;
+    }
 
    
     // API request url for geolocation of city entered
@@ -88,7 +90,7 @@ function getApi(event) {
         }
     
         var cityString = JSON.stringify(cityObj);
-        // Need to figure out how to remove duplicates!
+
         if (searchHistory.includes(cityString)) {
 
             for (var y=0; y<$("#search-history").children().length; y++) {
@@ -116,9 +118,9 @@ function getApi(event) {
             $("#search-history").children().remove();
 
             // Loops through previously searched city and displays as an unordered list 
-            for (var x=0; x<searchHistoryArray.length; x++) {
-                cityString = searchHistoryArray[x];
-                cityParsed = JSON.parse(searchHistoryArray[x]);
+            for (var y=0; y<searchHistoryArray.length; y++) {
+                cityString = searchHistoryArray[y];
+                cityParsed = JSON.parse(searchHistoryArray[y]);
                 cityNameParsed = cityParsed.name;
                 codeParsed = cityParsed.code;
                 latParsed = cityParsed.lat;
@@ -131,6 +133,7 @@ function getApi(event) {
                 cityListing.attr("data-lon", lonParsed);
 
                 $("#search-history").prepend(cityListing);
+
  
             };
 
@@ -176,7 +179,7 @@ function getApi(event) {
         })
         // Displays weather forecast day by day
         .then(function(data) {
-            console.log(data);
+
             $("#forecast-title").text("5-Day Forecast");
             $("#date-1").text((data.list[4].dt_txt).split(" ")[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
@@ -215,26 +218,32 @@ function getApi(event) {
             $("#condition-5").text(data.list[36].weather[0].description);
             $("#temp-5").text("Temperature: " + data.list[36].main.temp + "°F");
             $("#humidity-5").text("Humidity: " + data.list[36].main.humidity + "%");
-            $("#wind-5").text("Wind Speed: " + data.list[36].wind.speed + "mph");
+            $("#wind-5").text("Wind Speed: " + data.list[36].wind.speed + "mph"); 
 
 
         })
 
-        
+        $('#search-city').val("");
+        $('#state').val("");
+
+        // If users click on search history for updated weather
+        $('.city').on("click", refreshWeather);
+    
     })
     
-
 }
 
 // To retrieve updated weather data from search history
 function refreshWeather(event) {
-
 
     var cityName = $(event.target).attr("data-city");
     var stateCode = $(event.target).attr("data-state");
     var latitude = $(event.target).attr("data-lat");
     var longitude = $(event.target).attr("data-lon");
     var date = dayjs().format('dddd, MMM DD');
+
+
+
 
     var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
 
@@ -273,7 +282,7 @@ function refreshWeather(event) {
         })
         // Displays weather forecast day by day
         .then(function(data) {
-            console.log(data);
+
             $("#forecast-title").text("5-Day Forecast");
             $("#date-1").text((data.list[4].dt_txt).split(" ")[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
@@ -323,22 +332,17 @@ function refreshWeather(event) {
 
 }
 
+function clearList() {
+    localStorage.clear();
+    $("#search-history").children().remove();
 
-
-
-// Refreshes page for new city search
-function refresh() {
-    location.reload();
 }
-
-
-
-
-
 
 
 
 // Event Listeners
 $('#search').on("click", getApi);
 $('.city').on("click", refreshWeather);
-$('#refresh').on("click",refresh);
+$('#clear-history').on("click",clearList);
+
+
