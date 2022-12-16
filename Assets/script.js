@@ -1,16 +1,39 @@
 // Clock Function
+
+var alarm = new Audio();
+alarm.src = "Assets/Sound Effects/Hour Countdown.wav";
+
 setInterval(function() {  
     var date = dayjs().format('dddd, MMM DD, YYYY');
     var time = dayjs().format('h:mm:ss A');  
-    $('#clock').text("Today is " + date + ", and it is now " + time);
+    $('#clock').html("Today is " + date + "<br>and it is now " + time);
+    var newHour = dayjs().format('mm:ss');
+    if (newHour === "59:57") {
+        alarm.play();
+    }
+
+    var light = dayjs().format('A');
+if (light === "AM") {
+    $('#header-content').attr("class",'day');
+
+} else {
+    $('#header-content').attr("class",'night');
+
+}
 
 },1000);
+
+
 
 // Retrieves search history from local storage and display previously searched cities with dataset of city info inside the html tag
 var searchHistory = localStorage.getItem("searchHistory") || "";
 
 var searchHistoryArray = searchHistory.split("?");
 searchHistoryArray.pop();
+
+// Hides weather boxes
+$("#current-weather-container").hide();
+$("#forecast-container").hide();
 
 // Loops through previously searched city and displays as an unordered list
 // Need to figure out how to remove duplicates!
@@ -105,6 +128,8 @@ function getApi(event) {
 
         } else {
 
+
+
             searchHistory += cityString + "?"; 
 
             localStorage.setItem("searchHistory",searchHistory);
@@ -142,6 +167,10 @@ function getApi(event) {
         // API request for current weather
         var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
 
+        // Displays weather boxes
+        $("#current-weather-container").show();
+        $("#forecast-container").show(); 
+
         // GET request for current weather
         fetch(getCurrentUrl)
         .then(function(response) {
@@ -159,6 +188,7 @@ function getApi(event) {
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
             $("#temp").text("Temperature: " + data.main.temp + "°F");
+            $("#feel").text("Feels Like: " + data.main.feels_like + "°F");
             $("#temp-max").text("High: " + data.main.temp_max + "°F");
             $("#temp-min").text("Low: " + data.main.temp_min + "°F");
             $("#wind").text("Wind Speed: " + data.wind.speed + "mph");
@@ -247,6 +277,10 @@ function refreshWeather(event) {
 
     var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
 
+        // Displays weather boxes
+        $("#current-weather-container").show();
+        $("#forecast-container").show();    
+
         // GET request for current weather
         fetch(getCurrentUrl)
         .then(function(response) {
@@ -262,6 +296,7 @@ function refreshWeather(event) {
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
             $("#temp").text("Temperature: " + data.main.temp + "°F");
+            $("#feel").text("Feels Like: " + data.main.feels_like + "°F");
             $("#temp-max").text("High: " + data.main.temp_max + "°F");
             $("#temp-min").text("Low: " + data.main.temp_min + "°F");
             $("#wind").text("Wind Speed: " + data.wind.speed + "mph");

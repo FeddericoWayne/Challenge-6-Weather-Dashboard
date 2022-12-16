@@ -1,18 +1,93 @@
 * {
-    font-family: monospace;
+    font-family: 'Varela Round', sans-serif;
     background-color: white;
 }
 
-/* Search history styling */
+/* day and night mode */
+.day {
+
+
+}
+
+.night {
+
+
+}
+
+header {
+
+    font-size: 1.2rem;
+    text-align: center;
+    width: 98%;
+    margin: auto;
+    padding: 15px 0px;
+    border: 5px solid black;
+    border-radius: 15px;
+}
+
+
+#input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#search-city, #state {
+    padding: 5px 15px;
+    margin: 5px 5px;
+    border: 3px solid black;
+    display:inline-block;
+}
+
+#system {
+    text-align: center;
+}
+
+
+
+#search {
+    width: fit-content;
+    padding: 5px 15px;
+    margin: 5px 5px;
+    border: 3px solid black;
+    display:inline-block;
+}
+
+#search-history-container {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#search-history {
+    margin-top: 0px;
+    padding-left: 0;
+}
+
 .city {
     list-style-type: none;
+    padding: 5px 15px;
+    margin: 5px 5px;
+    margin-top: 0px;
+    border: 3px solid black;
+    border-radius: 15px;
+    display:inline-block;
 }
 
-.forecast-container {
-    display: flex;
-    flex-direction: row;
+#clear-history {
+    
+    width: fit-content;
+    padding: 5px 15px;
+    margin: 5px 5px;
+    border: 3px solid black;
+    display:inline-block;
 }
 
+#city-input,#state-input,#submit {
+    display:block;
+    text-align: center;
+    margin: 10px auto;
+}
 
 /* Current weather styling */
 #current-weather-container {
@@ -34,10 +109,26 @@
     border: 5px solid black; 
 }
 
+
+
+#forecast-title {
+    text-align: center;
+    width: 100%;
+}
+
+#forecasts {
+    justify-content: center;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
 #forecast-1, #forecast-2, #forecast-3, #forecast-4, #forecast-5 {
     padding: 15px 15px;
-    margin: 15px 10px;
+    margin: 0px 5px;
+    margin-bottom: 5px;
     border-radius: 25px;
-    width: 18%;
+    width: fit-content;
     border: 5px solid black; 
 }

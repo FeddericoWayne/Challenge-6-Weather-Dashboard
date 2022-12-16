@@ -15,87 +15,110 @@
       integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
       crossorigin="anonymous"
     ></script>
+    <!-- Google Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+     
     <link rel="stylesheet" href="./Assets/style.css">
-    <title>Weather Dashboard</title>
+    <title>US Weather Dashboard</title>
 </head>
 <body>
     <header>
-        <div>
-            <h1 id="title">WEATHER DASHBOARD</h1>
+        <div id="header-content">
+            <h1 id="title">US WEATHER DASHBOARD</h1>
             <h3 id="clock"></h3>
         </div>
     </header>
-    <div>
-        <label for="search-city">Enter City Name:</label>
-        <input type="text" id="search-city" placeholder="ex: New York City">
-        <label for="state">Enter State Code:</label>
-        <input type="text" id="state" placeholder="ex: NY">
-        <button id="search" class="btn">Get Weather</button>
-    </div>
-    <div>
-        <h3 id="search-history-title">Search History</h3>
-        <ul id="search-history"></ul>
-        <button id="clear-history">Clear History</button>
-    </div>
+    <main>
+        <div id="input-container">
+            <div id="city-input">
+                <label for="search-city">Enter City Name:</label>
+                <input type="text" id="search-city" placeholder="ex: New York City">
+            </div>
+            <div id="state-input">
+                <label for="state">Enter State Code:</label>
+                <input type="text" id="state" placeholder="ex: NY">
+            </div>
+            <div id="system">
+                <input type="radio" id="fahrenheit" name="temp" checked>
+                <label for="fahrenheit">Fahrenheit</label>
+                <input type="radio" id="celsius" name="temp">
+                <label for="celsius">Celsius</label>
+            </div>
+            <div id="submit">
+                <button id="search" class="btn">Get Weather</button>
+            </div>
+            <div id="search-history-container">
+                <h3 id="search-history-title">Recently Searched:</h3>
+                <ul id="search-history"></ul>
+                <button id="clear-history">Clear List</button>
+            </div>
+        </div>
 
-    <div id="current-weather-container">
-        <h2 id="current-weather-title">Current Weather</h2>
-        <div id="current-weather">
-            <h2 id="location"></h2>
-            <h3 id="today"></h3>
-            <img id="weather-icon">
-            <h3 id="condition"></h3>
-            <p id="temp"></p>
-            <p id="temp-max"></p>
-            <p id="temp-min"></p>
-            <p id="humidity"></p>
-            <p id="wind"></p>
+        <div id="current-weather-container">
+            <h2 id="current-weather-title">Current Weather</h2>
+            <div id="current-weather">
+                <h2 id="location"></h2>
+                <h3 id="today"></h3>
+                <img id="weather-icon">
+                <h3 id="condition"></h3>
+                <p id="temp"></p>
+                <p id="feel"></p>
+                <p id="temp-max"></p>
+                <p id="temp-min"></p>
+                <p id="humidity"></p>
+                <p id="wind"></p>
+            </div>
         </div>
-    </div>
-    
-    <div id="forecast" class="forecast-container">
-        <h2 id="forecast-title"></h2>
-        <div id="forecast-1" class="forecast">
-            <h3 id="date-1"></h3>
-            <img id="weather-icon-1">
-            <h3 id="condition-1"></h3>
-            <p id="temp-1"></p>
-            <p id="humidity-1"></p>
-            <p id="wind-1"></p>
+
+        <div id="forecast-container">
+            <h2 id="forecast-title">5-Day Forecast</h2>
+            <div id="forecasts">
+                <div id="forecast-1" class="forecast">
+                    <h3 id="date-1"></h3>
+                    <img id="weather-icon-1">
+                    <h3 id="condition-1"></h3>
+                    <p id="temp-1"></p>
+                    <p id="humidity-1"></p>
+                    <p id="wind-1"></p>
+                </div>
+                <div id="forecast-2" class="forecast">
+                    <h3 id="date-2"></h3>
+                    <img id="weather-icon-2">
+                    <h3 id="condition-2"></h3>
+                    <p id="temp-2"></p>
+                    <p id="humidity-2"></p>
+                    <p id="wind-2"></p>
+                </div>
+                <div id="forecast-3" class="forecast">
+                    <h3 id="date-3"></h3>
+                    <img id="weather-icon-3">
+                    <h3 id="condition-3"></h3>
+                    <p id="temp-3"></p>
+                    <p id="humidity-3"></p>
+                    <p id="wind-3"></p>
+                </div>
+                <div id="forecast-4" class="forecast">
+                    <h3 id="date-4"></h3>
+                    <img id="weather-icon-4">
+                    <h3 id="condition-4"></h3>
+                    <p id="temp-4"></p>
+                    <p id="humidity-4"></p>
+                    <p id="wind-4"></p>
+                </div>
+                <div id="forecast-5" class="forecast">
+                    <h3 id="date-5"></h3>
+                    <img id="weather-icon-5">
+                    <h3 id="condition-5"></h3>
+                    <p id="temp-5"></p>
+                    <p id="humidity-5"></p>
+                    <p id="wind-5"></p>
+                </div>
+            </div>
         </div>
-        <div id="forecast-2" class="forecast">
-            <h3 id="date-2"></h3>
-            <img id="weather-icon-2">
-            <h3 id="condition-2"></h3>
-            <p id="temp-2"></p>
-            <p id="humidity-2"></p>
-            <p id="wind-2"></p>
-        </div>
-        <div id="forecast-3" class="forecast">
-            <h3 id="date-3"></h3>
-            <img id="weather-icon-3">
-            <h3 id="condition-3"></h3>
-            <p id="temp-3"></p>
-            <p id="humidity-3"></p>
-            <p id="wind-3"></p>
-        </div>
-        <div id="forecast-4" class="forecast">
-            <h3 id="date-4"></h3>
-            <img id="weather-icon-4">
-            <h3 id="condition-4"></h3>
-            <p id="temp-4"></p>
-            <p id="humidity-4"></p>
-            <p id="wind-4"></p>
-        </div>
-        <div id="forecast-5" class="forecast">
-            <h3 id="date-5"></h3>
-            <img id="weather-icon-5">
-            <h3 id="condition-5"></h3>
-            <p id="temp-5"></p>
-            <p id="humidity-5"></p>
-            <p id="wind-5"></p>
-        </div>
-    </div>
+
+    </main>
     
 
     <script src="./Assets/script.js"></script>
