@@ -27,35 +27,32 @@
     <header>
         <div id="header-content">
             <h1 id="title">US WEATHER DASHBOARD</h1>
-            <h3 id="clock"></h3>
         </div>
     </header>
     <main>
         <div id="input-container">
             <div id="city-input">
-                <label for="search-city">Enter City Name:</label>
-                <input type="text" id="search-city" placeholder="ex: New York City">
+                <label id="city-label" for="search-city">Enter City Name:</label>
+                <input type="text" id="search-city" placeholder="ex: New York City" data-msg="Please enter City Name">
             </div>
             <div id="state-input">
-                <label for="state">Enter State Code:</label>
-                <input type="text" id="state" placeholder="ex: NY">
-            </div>
-            <div id="system">
-                <input type="radio" id="fahrenheit" name="temp" checked>
-                <label for="fahrenheit">Fahrenheit</label>
-                <input type="radio" id="celsius" name="temp">
-                <label for="celsius">Celsius</label>
+                <label id="state-label" for="state">Enter State Code:</label>
+                <input type="text" id="state" placeholder="ex: NY" data-msg="Please enter State Code">
             </div>
             <div id="submit">
+                <h3 id="warning" class="empty">Oops! Location Not Found!</h3>
                 <button id="search" class="btn">Get Weather</button>
             </div>
             <div id="search-history-container">
                 <h3 id="search-history-title">Recently Searched:</h3>
+                <p id="empty-list" class="empty">Search for Cities to Add to List</p>
                 <ul id="search-history"></ul>
-                <button id="clear-history">Clear List</button>
+                <button id="clear-history" class="btn">Clear List</button>
             </div>
         </div>
-
+        <div>
+            <h3 id="clock"></h3>
+        </div>
         <div id="current-weather-container">
             <h2 id="current-weather-title">Current Weather</h2>
             <div id="current-weather">

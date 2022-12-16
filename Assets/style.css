@@ -1,30 +1,59 @@
+:root {
+    --teal: #3A9DBE;
+    --turquoise: #54B0C9;
+    --sea: #7CBCCA;
+    --moss: #BCC8B7;
+    --sand: #FFECBD;
+    --stone: #F8B77C;
+    --dark: grey;
+    --shade: rgb(179, 179, 179);
+    --muted: rgb(213, 213, 213);
+    --danger: rgb(255, 157, 157);
+}
+
 * {
     font-family: 'Varela Round', sans-serif;
-    background-color: white;
-}
-
-/* day and night mode */
-.day {
-
 
 }
 
-.night {
+.btn:active {
+    transform: translateY(3px);
+}
+
+#clock {
+
+    color: white;
+    background-color: var(--dark);
+    margin: 10px auto;
+    text-align: center;
+    padding: 15px 0px;
+    border: 10px solid var(--muted);
+    border-radius: 15px;
+    width: 50%;
 
 
 }
 
 header {
-
+    color: white;
+    background-color: var(--dark);
     font-size: 1.2rem;
     text-align: center;
     width: 98%;
     margin: auto;
     padding: 15px 0px;
-    border: 5px solid black;
+    border: 10px solid var(--muted);
     border-radius: 15px;
 }
 
+/* Warning */
+.empty {
+    color: var(--danger);
+}
+
+label {
+    color: var(--dark);
+}
 
 #input-container {
     display: flex;
@@ -34,7 +63,7 @@ header {
 #search-city, #state {
     padding: 5px 15px;
     margin: 5px 5px;
-    border: 3px solid black;
+    border: 3px solid var(--shade);
     display:inline-block;
 }
 
@@ -45,10 +74,13 @@ header {
 
 
 #search {
+    cursor: pointer;
+    color:white;
     width: fit-content;
     padding: 5px 15px;
     margin: 5px 5px;
-    border: 3px solid black;
+    border: 3px solid var(--danger);
+    background-color: var(--turquoise);
     display:inline-block;
 }
 
@@ -65,22 +97,27 @@ header {
 }
 
 .city {
+    cursor: pointer;
+    color: white;
     list-style-type: none;
     padding: 5px 15px;
     margin: 5px 5px;
     margin-top: 0px;
-    border: 3px solid black;
+    border: 3px solid var(--moss);
     border-radius: 15px;
     display:inline-block;
+    background-color: var(--teal);
 }
 
 #clear-history {
-    
+    color: white;
+    cursor: pointer;
     width: fit-content;
     padding: 5px 15px;
     margin: 5px 5px;
-    border: 3px solid black;
+    border: 3px solid var(--turquoise);
     display:inline-block;
+    background-color: var(--danger);
 }
 
 #city-input,#state-input,#submit {
@@ -91,6 +128,7 @@ header {
 
 /* Current weather styling */
 #current-weather-container {
+
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -100,13 +138,20 @@ header {
 
 }
 
+#current-weather-title, #forecast-title, #search-history-title {
+    color: var(--dark);
+}
+
+
 #current-weather {
+    color: white;
     text-align: center;
     padding: 15px 25px;
     margin-top: 0px;
     border-radius: 25px;
     width: 90%;
-    border: 5px solid black; 
+    border: 10px solid var(--shade);
+    background-color: var(--teal); 
 }
 
 
@@ -124,11 +169,36 @@ header {
 
 }
 
-#forecast-1, #forecast-2, #forecast-3, #forecast-4, #forecast-5 {
-    padding: 15px 15px;
+.forecast {
+    color: black;
+    padding: 15px 20px;
     margin: 0px 5px;
     margin-bottom: 5px;
     border-radius: 25px;
     width: fit-content;
-    border: 5px solid black; 
+}
+
+#forecast-1 {
+
+    background-color: var(--turquoise);
+}
+
+#forecast-2 {
+
+    background-color: var(--sea);
+}
+
+#forecast-3 {
+
+    background-color: var(--moss);
+}
+
+#forecast-4 {
+
+    background-color: var(--sand);
+}
+
+#forecast-5 {
+
+    background-color: var(--stone);
 }

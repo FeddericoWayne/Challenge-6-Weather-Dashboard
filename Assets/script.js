@@ -1,5 +1,23 @@
-// Clock Function
+// Sound effects
+var focus = new Audio();
+focus.src = "Assets/Sound Effects/Click.wav";
 
+var startSearch = new Audio();
+startSearch.src = "Assets/Sound Effects/Search.wav";
+
+var warning = new Audio();
+warning.src = "Assets/Sound Effects/Warning.wav";
+
+
+function type() {
+    focus.play();
+}
+
+$("#search-city").on("focus",type);
+$("#state").on("focus",type);
+
+
+// Clock function
 var alarm = new Audio();
 alarm.src = "Assets/Sound Effects/Hour Countdown.wav";
 
@@ -12,21 +30,25 @@ setInterval(function() {
         alarm.play();
     }
 
-    var light = dayjs().format('A');
-if (light === "AM") {
-    $('#header-content').attr("class",'day');
-
-} else {
-    $('#header-content').attr("class",'night');
-
-}
 
 },1000);
 
 
 
+
+
+
+
 // Retrieves search history from local storage and display previously searched cities with dataset of city info inside the html tag
 var searchHistory = localStorage.getItem("searchHistory") || "";
+
+// If search history is empty
+if (searchHistory === "") {
+    $("#empty-list").show();
+
+} else {
+    $("#empty-list").hide();
+}
 
 var searchHistoryArray = searchHistory.split("?");
 searchHistoryArray.pop();
@@ -34,6 +56,9 @@ searchHistoryArray.pop();
 // Hides weather boxes
 $("#current-weather-container").hide();
 $("#forecast-container").hide();
+
+// Hides warning
+$("#warning").hide();
 
 // Loops through previously searched city and displays as an unordered list
 // Need to figure out how to remove duplicates!
@@ -45,7 +70,7 @@ for (var x=0; x<searchHistoryArray.length; x++) {
     var latParsed = cityParsed.lat;
     var lonParsed = cityParsed.lon;
     var cityListing = $("<li>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
-    cityListing.addClass("city");
+    cityListing.addClass("city btn");
     cityListing.attr("data-city", cityNameParsed);
     cityListing.attr("data-state", codeParsed);
     cityListing.attr("data-lat", latParsed);
@@ -62,6 +87,9 @@ function getApi(event) {
 
     event.preventDefault(); 
 
+    event.stopPropagation();
+
+
     // Takes input from user
     var cityName = $("#search-city").val().toLowerCase();
     var stateCode = $("#state").val().toUpperCase();
@@ -70,41 +98,47 @@ function getApi(event) {
     var date = dayjs().format('dddd, MMM DD');
 
     // Alerts when user enters nothin or missing state code
-    if (!cityName && !stateCode) {
-        alert("Please enter city and state!");
-        
+    if (cityName === "" || stateCode ==="") {
+        warning.play();
+        $("#city-label").attr("class","empty");
+        $("#state-label").attr("class","empty");
         return;
+    } else {
+        startSearch.play();
+        $("#city-label").attr("class","");
+        $("#state-label").attr("class","");
+
     }
 
-    if (!stateCode) {
-        alert("Please enter state code!");
 
-        return;
-    }
 
-   
     // API request url for geolocation of city entered
     var geoRequestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + ",US&limit=1&appid=7df7243f5169b46433ea853892fbb930";
 
+    
     // GET request for geolocation
     fetch(geoRequestUrl)
     .then(function(response) {
 
-        // If the reponse is ok but no data is found
-        // Need to figure out how to capture typos and errors
-        if(!response.ok) {
-            alert("Oops! Typo? Try Again?");
-            location.reload();
-            return
-        } else {
         return response.json()
-        }
+
     })
     .then(function(data) {
+
+        // If location can't be found
+        if (data.length === 0) {
+            warning.play();
+            $("#warning").show();
+            $('#search-city').val("");
+            $('#state').val("");
+        } else {
+            $("#warning").hide();
+        }
+
         latitude = data[0].lat;
         longitude = data[0].lon;
 
-         // add current search to search history
+        // add current search to search history
         var cityObj = {
             name: cityName,
             code: stateCode,
@@ -114,6 +148,7 @@ function getApi(event) {
     
         var cityString = JSON.stringify(cityObj);
 
+        // If city searched is already in the search history list
         if (searchHistory.includes(cityString)) {
 
             for (var y=0; y<$("#search-history").children().length; y++) {
@@ -128,7 +163,7 @@ function getApi(event) {
 
         } else {
 
-
+            $("#empty-list").hide();
 
             searchHistory += cityString + "?"; 
 
@@ -151,7 +186,7 @@ function getApi(event) {
                 latParsed = cityParsed.lat;
                 lonParsed = cityParsed.lon;
                 cityListing = $("<li>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
-                cityListing.addClass("city");
+                cityListing.addClass("city btn");
                 cityListing.attr("data-city", cityNameParsed);
                 cityListing.attr("data-state", codeParsed);
                 cityListing.attr("data-lat", latParsed);
@@ -164,6 +199,8 @@ function getApi(event) {
 
         };
 
+
+        
         // API request for current weather
         var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
 
@@ -182,7 +219,7 @@ function getApi(event) {
         })
         // Displays current weather
         .then(function(data) {
-            console.log(data);
+                
             $("#location").text(cityName.toUpperCase() + ", " + stateCode);
             $("#today").text(date);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
@@ -253,6 +290,9 @@ function getApi(event) {
 
         })
 
+
+        
+
         $('#search-city').val("");
         $('#state').val("");
 
@@ -265,6 +305,10 @@ function getApi(event) {
 
 // To retrieve updated weather data from search history
 function refreshWeather(event) {
+
+    startSearch.play();
+    $("#warning").hide();
+    $("#empty-list").hide();
 
     var cityName = $(event.target).attr("data-city");
     var stateCode = $(event.target).attr("data-state");
@@ -290,7 +334,6 @@ function refreshWeather(event) {
         })
         // Displays current weather
         .then(function(data) {
-            console.log(data);
             $("#location").text(cityName.toUpperCase() + ", " + stateCode);
             $("#today").text(date);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
@@ -361,15 +404,13 @@ function refreshWeather(event) {
 
         })
 
-        
-    
-
 
 }
 
 function clearList() {
+
     localStorage.clear();
-    $("#search-history").children().remove();
+    location.reload();
 
 }
 
@@ -379,5 +420,8 @@ function clearList() {
 $('#search').on("click", getApi);
 $('.city').on("click", refreshWeather);
 $('#clear-history').on("click",clearList);
+
+
+
 
 
