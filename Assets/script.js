@@ -34,11 +34,6 @@ setInterval(function() {
 },1000);
 
 
-
-
-
-
-
 // Retrieves search history from local storage and display previously searched cities with dataset of city info inside the html tag
 var searchHistory = localStorage.getItem("searchHistory") || "";
 
@@ -57,8 +52,9 @@ searchHistoryArray.pop();
 $("#current-weather-container").hide();
 $("#forecast-container").hide();
 
-// Hides warning
-$("#warning").hide();
+// Hides warnings
+$("#warning-1").hide();
+$("#warning-2").hide();
 
 // Loops through previously searched city and displays as an unordered list
 // Need to figure out how to remove duplicates!
@@ -69,8 +65,9 @@ for (var x=0; x<searchHistoryArray.length; x++) {
     var codeParsed = cityParsed.code;
     var latParsed = cityParsed.lat;
     var lonParsed = cityParsed.lon;
-    var cityListing = $("<li>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
+    var cityListing = $("<a>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
     cityListing.addClass("city btn");
+    cityListing.attr("href", "#current-weather-container");
     cityListing.attr("data-city", cityNameParsed);
     cityListing.attr("data-state", codeParsed);
     cityListing.attr("data-lat", latParsed);
@@ -102,11 +99,13 @@ function getApi(event) {
         warning.play();
         $("#city-label").attr("class","empty");
         $("#state-label").attr("class","empty");
+        $("#warning-2").show();
         return;
     } else {
         startSearch.play();
         $("#city-label").attr("class","");
         $("#state-label").attr("class","");
+        $("#warning-2").hide();
 
     }
 
@@ -128,11 +127,13 @@ function getApi(event) {
         // If location can't be found
         if (data.length === 0) {
             warning.play();
-            $("#warning").show();
+            $("#warning-1").show();
             $('#search-city').val("");
             $('#state').val("");
+            $("#warning-2").hide();
         } else {
-            $("#warning").hide();
+            $("#warning-1").hide();
+            $("#warning-2").hide();
         }
 
         latitude = data[0].lat;
@@ -185,8 +186,9 @@ function getApi(event) {
                 codeParsed = cityParsed.code;
                 latParsed = cityParsed.lat;
                 lonParsed = cityParsed.lon;
-                cityListing = $("<li>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
+                cityListing = $("<a>").text(cityNameParsed.toUpperCase() + ", " + codeParsed.toUpperCase());
                 cityListing.addClass("city btn");
+                cityListing.attr("href", "#current-weather-container");
                 cityListing.attr("data-city", cityNameParsed);
                 cityListing.attr("data-state", codeParsed);
                 cityListing.attr("data-lat", latParsed);
@@ -207,6 +209,11 @@ function getApi(event) {
         // Displays weather boxes
         $("#current-weather-container").show();
         $("#forecast-container").show(); 
+
+        // To scroll down to weather section
+        var currentWeatherContainer = document.querySelector("#current-weather-container");
+        currentWeatherContainer.scrollIntoView();
+        
 
         // GET request for current weather
         fetch(getCurrentUrl)
@@ -307,7 +314,7 @@ function getApi(event) {
 function refreshWeather(event) {
 
     startSearch.play();
-    $("#warning").hide();
+    $("#warning-1").hide();
     $("#empty-list").hide();
 
     var cityName = $(event.target).attr("data-city");

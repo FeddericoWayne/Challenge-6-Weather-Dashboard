@@ -40,12 +40,13 @@
                 <input type="text" id="state" placeholder="ex: NY" data-msg="Please enter State Code">
             </div>
             <div id="submit">
-                <h3 id="warning" class="empty">Oops! Location Not Found!</h3>
+                <h3 id="warning-1" class="empty">Oops! Location Not Found!</h3>
+                <h3 id="warning-2" class="empty">Please Enter Both City and State!</h3>
                 <button id="search" class="btn">Get Weather</button>
             </div>
             <div id="search-history-container">
                 <h3 id="search-history-title">Recently Searched:</h3>
-                <p id="empty-list" class="empty">Search for Cities to Add to List</p>
+                <p id="empty-list" class="empty">Search for Cities Above to Add to List</p>
                 <ul id="search-history"></ul>
                 <button id="clear-history" class="btn">Clear List</button>
             </div>
@@ -113,6 +114,9 @@
                     <p id="wind-5"></p>
                 </div>
             </div>
+        </div>
+        <div id="back-button">
+        <a id="back" href="#header-content" class="btn">Back to Top</a>
         </div>
 
     </main>
