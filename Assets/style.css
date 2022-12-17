@@ -1,3 +1,4 @@
+/* CSS variables */
 :root {
     --teal: #3A9DBE;
     --turquoise: #54B0C9;
@@ -9,18 +10,32 @@
     --shade: rgb(179, 179, 179);
     --muted: rgb(213, 213, 213);
     --danger: rgb(255, 157, 157);
+    --background-top: rgb(207, 255, 251);
+    --background-bottom: rgb(250, 248, 217);
+
 }
 
 /* For smoother scrolling */
 html {
     scroll-behavior: smooth;
+    height: 100%;
+
   }
 
 * {
     font-family: 'Varela Round', sans-serif;
+}
+
+/* Background styling */
+body {
+
+    background: linear-gradient(180deg, var(--background-top) 0%, var(--background-bottom) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
 }
 
+/* Buttons styling */
 .btn:active {
     transform: translateY(3px);
 }
@@ -32,13 +47,14 @@ html {
     margin: 10px auto;
     text-align: center;
     padding: 15px 0px;
-    border: 10px solid var(--muted);
+    border: 7px solid var(--muted);
     border-radius: 15px;
     width: 50%;
 
 
 }
 
+/* Header styling */
 header {
 
     display: flex;
@@ -58,7 +74,7 @@ header {
 
 
 
-/* Warning */
+/* Warnings styling */
 .empty {
     color: var(--danger);
 }
@@ -67,6 +83,7 @@ label {
     color: var(--dark);
 }
 
+/* Main section styling */
 #input-container {
     display: flex;
     flex-direction: column;
@@ -78,12 +95,6 @@ label {
     border: 3px solid var(--shade);
     display:inline-block;
 }
-
-#system {
-    text-align: center;
-}
-
-
 
 #search {
     text-decoration: none;
@@ -169,7 +180,7 @@ label {
 }
 
 
-
+/* Forecasts styling */
 #forecast-title {
     text-align: center;
     width: 100%;
@@ -247,6 +258,17 @@ label {
     #clock {
         font-size: 0.8rem;
         width: 80%;
+    }
+
+    #current-weather-container {
+
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        margin: 0px auto;
+    
     }
 
     #current-weather {

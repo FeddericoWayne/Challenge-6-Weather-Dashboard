@@ -21,6 +21,8 @@ $("#state").on("focus",type);
 var alarm = new Audio();
 alarm.src = "Assets/Sound Effects/Hour Countdown.wav";
 
+var weatherDate = dayjs().format('ddd, MM / DD, YYYY');
+
 setInterval(function() {  
     var date = dayjs().format('dddd, MMM DD, YYYY');
     var time = dayjs().format('h:mm:ss A');  
@@ -93,7 +95,7 @@ function getApi(event) {
     var stateCode = $("#state").val().toUpperCase();
     var latitude = "";
     var longitude = "";
-    var date = dayjs().format('dddd, MMM DD');
+
 
     // Alerts when user enters nothin or missing state code
     if (cityName === "" || stateCode ==="") {
@@ -245,9 +247,9 @@ function getApi(event) {
         })
         // Displays current weather
         .then(function(data) {
-                
+
             $("#location").text(cityName.toUpperCase() + ", " + stateCode);
-            $("#today").text(date);
+            $("#today").text(weatherDate);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
             $("#temp").text("Temperature: " + data.main.temp + "°F");
@@ -273,8 +275,21 @@ function getApi(event) {
         // Displays weather forecast day by day
         .then(function(data) {
 
+            // Reformats dates from data
+            var dateString1 = (data.list[4].dt_txt).split(" ")[0];
+            var dateArray1 = dateString1.split("-");
+            var dateString2 = (data.list[12].dt_txt).split(" ")[0];
+            var dateArray2 = dateString2.split("-");
+            var dateString3 = (data.list[20].dt_txt).split(" ")[0];
+            var dateArray3 = dateString3.split("-");
+            var dateString4 = (data.list[28].dt_txt).split(" ")[0];
+            var dateArray4 = dateString4.split("-");
+            var dateString5 = (data.list[36].dt_txt).split(" ")[0];
+            var dateArray5 = dateString5.split("-");
+
+            
             $("#forecast-title").text("5-Day Forecast");
-            $("#date-1").text((data.list[4].dt_txt).split(" ")[0]);
+            $("#date-1").text(dateArray1[1] + " / " + dateArray1[2] + ", " + dateArray1[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
             $("#condition-1").text(data.list[4].weather[0].description.toUpperCase());
             $("#temp-1").text("Temperature: " + data.list[4].main.temp + "°F");
@@ -282,7 +297,7 @@ function getApi(event) {
             $("#wind-1").text("Wind Speed: " + data.list[4].wind.speed + "mph");
 
             
-            $("#date-2").text((data.list[12].dt_txt).split(" ")[0]);
+            $("#date-2").text(dateArray2[1] + " / " + dateArray2[2] + ", " + dateArray2[0]);
             $("#weather-icon-2").attr("src","https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png");
             $("#condition-2").text(data.list[12].weather[0].description.toUpperCase());
             $("#temp-2").text("Temperature: " + data.list[12].main.temp + "°F");
@@ -290,7 +305,7 @@ function getApi(event) {
             $("#wind-2").text("Wind Speed: " + data.list[12].wind.speed + "mph");
 
 
-            $("#date-3").text((data.list[20].dt_txt).split(" ")[0]);
+            $("#date-3").text(dateArray3[1] + " / " + dateArray3[2] + ", " + dateArray3[0]);
             $("#weather-icon-3").attr("src","https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png");
             $("#condition-3").text(data.list[20].weather[0].description.toUpperCase());
             $("#temp-3").text("Temperature: " + data.list[20].main.temp + "°F");
@@ -298,7 +313,7 @@ function getApi(event) {
             $("#wind-3").text("Wind Speed: " + data.list[20].wind.speed + "mph");
 
 
-            $("#date-4").text((data.list[28].dt_txt).split(" ")[0]);
+            $("#date-4").text(dateArray4[1] + " / " + dateArray4[2] + ", " + dateArray4[0]);
             $("#weather-icon-4").attr("src","https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png");
             $("#condition-4").text(data.list[28].weather[0].description.toUpperCase());
             $("#temp-4").text("Temperature: " + data.list[28].main.temp + "°F");
@@ -306,7 +321,7 @@ function getApi(event) {
             $("#wind-4").text("Wind Speed: " + data.list[28].wind.speed + "mph");
 
 
-            $("#date-5").text((data.list[36].dt_txt).split(" ")[0]);
+            $("#date-5").text(dateArray5[1] + " / " + dateArray5[2] + ", " + dateArray5[0]);
             $("#weather-icon-5").attr("src","https://openweathermap.org/img/w/" + data.list[36].weather[0].icon + ".png");
             $("#condition-5").text(data.list[36].weather[0].description.toUpperCase());
             $("#temp-5").text("Temperature: " + data.list[36].main.temp + "°F");
@@ -367,7 +382,7 @@ function refreshWeather(event) {
         // Displays current weather
         .then(function(data) {
             $("#location").text(cityName.toUpperCase() + ", " + stateCode);
-            $("#today").text(date);
+            $("#today").text(weatherDate);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
             $("#temp").text("Temperature: " + data.main.temp + "°F");
@@ -393,8 +408,20 @@ function refreshWeather(event) {
         // Displays weather forecast day by day
         .then(function(data) {
 
+            // Reformats dates from data
+            var dateString1 = (data.list[4].dt_txt).split(" ")[0];
+            var dateArray1 = dateString1.split("-");
+            var dateString2 = (data.list[12].dt_txt).split(" ")[0];
+            var dateArray2 = dateString2.split("-");
+            var dateString3 = (data.list[20].dt_txt).split(" ")[0];
+            var dateArray3 = dateString3.split("-");
+            var dateString4 = (data.list[28].dt_txt).split(" ")[0];
+            var dateArray4 = dateString4.split("-");
+            var dateString5 = (data.list[36].dt_txt).split(" ")[0];
+            var dateArray5 = dateString5.split("-");
+
             $("#forecast-title").text("5-Day Forecast");
-            $("#date-1").text((data.list[4].dt_txt).split(" ")[0]);
+            $("#date-1").text(dateArray1[1] + " / " + dateArray1[2] + ", " + dateArray1[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
             $("#condition-1").text(data.list[4].weather[0].description.toUpperCase());
             $("#temp-1").text("Temperature: " + data.list[4].main.temp + "°F");
@@ -402,7 +429,7 @@ function refreshWeather(event) {
             $("#wind-1").text("Wind Speed: " + data.list[4].wind.speed + "mph");
 
             
-            $("#date-2").text((data.list[12].dt_txt).split(" ")[0]);
+            $("#date-2").text(dateArray2[1] + " / " + dateArray2[2] + ", " + dateArray2[0]);
             $("#weather-icon-2").attr("src","https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png");
             $("#condition-2").text(data.list[12].weather[0].description.toUpperCase());
             $("#temp-2").text("Temperature: " + data.list[12].main.temp + "°F");
@@ -410,7 +437,7 @@ function refreshWeather(event) {
             $("#wind-2").text("Wind Speed: " + data.list[12].wind.speed + "mph");
 
 
-            $("#date-3").text((data.list[20].dt_txt).split(" ")[0]);
+            $("#date-3").text(dateArray3[1] + " / " + dateArray3[2] + ", " + dateArray3[0]);
             $("#weather-icon-3").attr("src","https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png");
             $("#condition-3").text(data.list[20].weather[0].description.toUpperCase());
             $("#temp-3").text("Temperature: " + data.list[20].main.temp + "°F");
@@ -418,7 +445,7 @@ function refreshWeather(event) {
             $("#wind-3").text("Wind Speed: " + data.list[20].wind.speed + "mph");
 
 
-            $("#date-4").text((data.list[28].dt_txt).split(" ")[0]);
+            $("#date-4").text(dateArray4[1] + " / " + dateArray4[2] + ", " + dateArray4[0]);
             $("#weather-icon-4").attr("src","https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png");
             $("#condition-4").text(data.list[28].weather[0].description.toUpperCase());
             $("#temp-4").text("Temperature: " + data.list[28].main.temp + "°F");
@@ -426,7 +453,7 @@ function refreshWeather(event) {
             $("#wind-4").text("Wind Speed: " + data.list[28].wind.speed + "mph");
 
 
-            $("#date-5").text((data.list[36].dt_txt).split(" ")[0]);
+            $("#date-5").text(dateArray5[1] + " / " + dateArray5[2] + ", " + dateArray5[0]);
             $("#weather-icon-5").attr("src","https://openweathermap.org/img/w/" + data.list[36].weather[0].icon + ".png");
             $("#condition-5").text(data.list[36].weather[0].description.toUpperCase());
             $("#temp-5").text("Temperature: " + data.list[36].main.temp + "°F");
