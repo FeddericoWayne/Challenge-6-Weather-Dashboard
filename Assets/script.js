@@ -112,7 +112,7 @@ function getApi(event) {
 
 
     // API request url for geolocation of city entered
-    var geoRequestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + ",US&limit=1&appid=7df7243f5169b46433ea853892fbb930";
+    var geoRequestUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + ",US&limit=1&appid=7df7243f5169b46433ea853892fbb930";
 
     
     // GET request for geolocation
