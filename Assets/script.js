@@ -55,6 +55,7 @@ $("#forecast-container").hide();
 // Hides warnings
 $("#warning-1").hide();
 $("#warning-2").hide();
+$("#warning-3").hide();
 
 // Loops through previously searched city and displays as an unordered list
 // Need to figure out how to remove duplicates!
@@ -101,12 +102,14 @@ function getApi(event) {
         $("#state-label").attr("class","empty");
         $("#warning-1").hide();
         $("#warning-2").show();
+        $("#warning-3").hide();
         return;
     } else {
         startSearch.play();
         $("#city-label").attr("class","");
         $("#state-label").attr("class","");
         $("#warning-2").hide();
+        $("#warning-3").hide();
 
     }
 
@@ -126,15 +129,30 @@ function getApi(event) {
     .then(function(data) {
 
         // If location can't be found
-        if (data.length === 0) {
+        if (data.length === 0 || cityName.length < 2) {
             warning.play();
             $("#warning-1").show();
             $('#search-city').val("");
             $('#state').val("");
             $("#warning-2").hide();
+            return;
+
+        } else if (stateCode.length > 2 || stateCode.length < 2) {
+            warning.play();
+            $("#warning-3").show();
+            $('#search-city').val("");
+            $('#state').val("");
+            $("#warning-1").hide();
+            $("#warning-2").hide();
+            return;
+
+
+
         } else {
             $("#warning-1").hide();
             $("#warning-2").hide();
+            $("#warning-3").hide();
+
         }
 
         latitude = data[0].lat;
@@ -317,6 +335,7 @@ function refreshWeather(event) {
     startSearch.play();
     $("#warning-1").hide();
     $("#warning-2").hide();
+    $("#warning-3").hide();
     $("#empty-list").hide();
     $("#city-label").attr("class","");
     $("#state-label").attr("class","");
