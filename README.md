@@ -12,7 +12,7 @@ There's also a clock in the middle of the page for users to check the date and t
 At the bottom of the page is a "Back to Top" button for users to be taken back to the top of the webpage for another search. 
 
 
-The URL of the deployed, refactored webpage is can be found at: https://feddericowayne.github.io/Challenge-4-Workday-Scheduler/
+The URL of the deployed, refactored webpage is can be found at: https://feddericowayne.github.io/Challenge-6-Weather-Dashboard/
 
 Here's a screenshot of the webpage:
 
