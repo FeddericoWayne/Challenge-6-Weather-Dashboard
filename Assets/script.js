@@ -99,6 +99,7 @@ function getApi(event) {
         warning.play();
         $("#city-label").attr("class","empty");
         $("#state-label").attr("class","empty");
+        $("#warning-1").hide();
         $("#warning-2").show();
         return;
     } else {
@@ -315,7 +316,12 @@ function refreshWeather(event) {
 
     startSearch.play();
     $("#warning-1").hide();
+    $("#warning-2").hide();
     $("#empty-list").hide();
+    $("#city-label").attr("class","");
+    $("#state-label").attr("class","");
+    $('#search-city').val("");
+    $('#state').val("");
 
     var cityName = $(event.target).attr("data-city");
     var stateCode = $(event.target).attr("data-state");
