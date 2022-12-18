@@ -14,7 +14,7 @@ At the bottom of the page is a "Back to Top" button for users to be taken back t
 This App is created for both large and small viewports.
 
 
-The URL of the deployed webpage can be found at: https://feddericowayne.github.io/Challenge-6-Weather-Dashboard/
+The URL of the deployed webpage can be found at: https://feddericowayne.github.io/Weather-Dashboard/
 
 Here's a screenshot of the webpage:
 
