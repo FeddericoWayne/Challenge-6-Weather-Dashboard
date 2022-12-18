@@ -16,6 +16,11 @@ function type() {
 $("#search-city").on("focus",type);
 $("#state").on("focus",type);
 
+// Back to top button
+$("#back").on("click",function() {
+    startSearch.play();
+})
+
 
 // Clock function
 var alarm = new Audio();

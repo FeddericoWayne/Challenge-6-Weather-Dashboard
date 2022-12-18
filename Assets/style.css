@@ -103,7 +103,7 @@ label {
     width: fit-content;
     padding: 5px 15px;
     margin: 5px 5px;
-    border: 3px solid var(--danger);
+    border: 3px solid var(--shade);
     background-color: var(--turquoise);
     display:inline-block;
 }
@@ -131,7 +131,7 @@ label {
     border: 3px solid var(--moss);
     border-radius: 15px;
     display:inline-block;
-    background-color: var(--teal);
+    background: linear-gradient(180deg, var(--sea) 0%, var(--teal) 100%);
 }
 
 
@@ -141,7 +141,7 @@ label {
     width: fit-content;
     padding: 5px 15px;
     margin: 5px 5px;
-    border: 3px solid var(--turquoise);
+    border: 3px solid var(--shade);
     display:inline-block;
     background-color: var(--danger);
 }
@@ -207,27 +207,28 @@ label {
 
 #forecast-1 {
 
-    background-color: var(--turquoise);
+    background: linear-gradient(90deg, var(--teal) 0%, var(--turquoise) 100%);
+
 }
 
 #forecast-2 {
 
-    background-color: var(--sea);
+    background: linear-gradient(90deg, var(--turquoise) 0%, var(--sea) 100%);
 }
 
 #forecast-3 {
 
-    background-color: var(--moss);
+    background: linear-gradient(90deg, var(--sea) 0%, var(--moss) 100%);
 }
 
 #forecast-4 {
 
-    background-color: var(--sand);
+    background: linear-gradient(90deg, var(--moss) 0%, var(--sand) 100%);
 }
 
 #forecast-5 {
 
-    background-color: var(--stone);
+    background: linear-gradient(90deg, var(--sand) 0%, var(--stone) 100%);
 }
 
 /* Back-to-top button */
@@ -245,7 +246,7 @@ label {
     text-align: center;
     padding: 5px 15px;
     margin: 10px auto;
-    border: 3px solid var(--sand);
+    border: 3px solid var(--shade);
     background-color: var(--stone);
     display:inline-block;
 }
@@ -291,6 +292,32 @@ label {
         margin-bottom: 5px;
         border-radius: 25px;
         width: 80%;
+    }
+
+    #forecast-1 {
+
+        background: linear-gradient(180deg, var(--teal) 0%, var(--turquoise) 100%);
+    
+    }
+    
+    #forecast-2 {
+    
+        background: linear-gradient(180deg, var(--turquoise) 0%, var(--sea) 100%);
+    }
+    
+    #forecast-3 {
+    
+        background: linear-gradient(180deg, var(--sea) 0%, var(--moss) 100%);
+    }
+    
+    #forecast-4 {
+    
+        background: linear-gradient(180deg, var(--moss) 0%, var(--sand) 100%);
+    }
+    
+    #forecast-5 {
+    
+        background: linear-gradient(180deg, var(--sand) 0%, var(--stone) 100%);
     }
 
 
