@@ -79,7 +79,6 @@ for (var x=0; x<searchHistoryArray.length; x++) {
     $("#search-history").prepend(cityListing);
 
     
- 
 };
 
 
@@ -92,13 +91,13 @@ function getApi(event) {
 
     // Takes input from user
     var cityName = $("#search-city").val().toLowerCase();
-    var stateCode = $("#state").val().toUpperCase();
+    var stateCode = $("#state").val();
     var latitude = "";
     var longitude = "";
 
 
     // Alerts when user enters nothin or missing state code
-    if (cityName === "" || stateCode ==="") {
+    if (cityName === "" || stateCode === "") {
         warning.play();
         $("#city-label").attr("class","empty");
         $("#state-label").attr("class","empty");
@@ -120,7 +119,7 @@ function getApi(event) {
     // API request url for geolocation of city entered
     var geoRequestUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + ",US&limit=1&appid=7df7243f5169b46433ea853892fbb930";
 
-    
+
     // GET request for geolocation
     fetch(geoRequestUrl)
     .then(function(response) {
@@ -479,8 +478,3 @@ function clearList() {
 $('#search').on("click", getApi);
 $('.city').on("click", refreshWeather);
 $('#clear-history').on("click",clearList);
-
-
-
-
-

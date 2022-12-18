@@ -134,6 +134,7 @@ label {
     background-color: var(--teal);
 }
 
+
 #clear-history {
     color: white;
     cursor: pointer;
@@ -144,6 +145,7 @@ label {
     display:inline-block;
     background-color: var(--danger);
 }
+
 
 #city-input,#state-input,#submit {
     display:block;
