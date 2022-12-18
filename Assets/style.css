@@ -61,6 +61,7 @@ header {
     flex-direction: column;
     align-content: center;
     margin: 0px auto;
+    margin-bottom: 20px;
     color: white;
     background-color: var(--dark);
     font-size: 1.2rem;
@@ -89,7 +90,7 @@ label {
     flex-direction: column;
 }
 
-#search-city, #state {
+#search-city, #state, #system {
     padding: 5px 15px;
     margin: 5px 5px;
     border: 3px solid var(--shade);
@@ -147,10 +148,10 @@ label {
 }
 
 
-#city-input,#state-input,#submit {
+#city-input,#state-input,#unit-input,#submit {
     display:block;
     text-align: center;
-    margin: 10px auto;
+    margin: 5px auto;
 }
 
 /* Current weather styling */

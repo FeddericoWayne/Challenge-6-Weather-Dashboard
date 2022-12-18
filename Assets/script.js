@@ -28,6 +28,7 @@ alarm.src = "Assets/Sound Effects/Hour Countdown.wav";
 
 var weatherDate = dayjs().format('ddd, MM / DD, YYYY');
 
+
 setInterval(function() {  
     var date = dayjs().format('dddd, MMM DD, YYYY');
     var time = dayjs().format('h:mm:ss A');  
@@ -39,6 +40,7 @@ setInterval(function() {
 
 
 },1000);
+
 
 
 // Retrieves search history from local storage and display previously searched cities with dataset of city info inside the html tag
@@ -63,6 +65,7 @@ $("#forecast-container").hide();
 $("#warning-1").hide();
 $("#warning-2").hide();
 $("#warning-3").hide();
+
 
 // Loops through previously searched city and displays as an unordered list
 // Need to figure out how to remove duplicates!
@@ -92,6 +95,10 @@ function getApi(event) {
     event.preventDefault(); 
 
     event.stopPropagation();
+
+    // Selects the chosen temp unit
+    var unit = $("#system").val();
+    var symbol = $("#system option:selected").attr("data-unit");
 
 
     // Takes input from user
@@ -229,7 +236,7 @@ function getApi(event) {
 
         
         // API request for current weather
-        var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
+        var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=" + unit + "&appid=7df7243f5169b46433ea853892fbb930";
 
         // Displays weather boxes
         $("#current-weather-container").show();
@@ -256,16 +263,16 @@ function getApi(event) {
             $("#today").text(weatherDate);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
-            $("#temp").text("Temperature: " + data.main.temp + "°F");
-            $("#feel").text("Feels Like: " + data.main.feels_like + "°F");
-            $("#temp-max").text("High: " + data.main.temp_max + "°F");
-            $("#temp-min").text("Low: " + data.main.temp_min + "°F");
+            $("#temp").text("Temperature: " + data.main.temp + symbol);
+            $("#feel").text("Feels Like: " + data.main.feels_like + symbol);
+            $("#temp-max").text("High: " + data.main.temp_max + symbol);
+            $("#temp-min").text("Low: " + data.main.temp_min + symbol);
             $("#wind").text("Wind Speed: " + data.wind.speed + "mph");
             $("#humidity").text("Humidity: " + data.main.humidity + "%")
         })
 
         // API request url for 5-day forecast
-        var getForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" +latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
+        var getForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" +latitude + "&lon=" + longitude + "&units=" + unit + "&appid=7df7243f5169b46433ea853892fbb930";
 
         // GET request for 5-day forecast
         fetch(getForecastUrl)
@@ -296,7 +303,7 @@ function getApi(event) {
             $("#date-1").text(dateArray1[1] + " / " + dateArray1[2] + ", " + dateArray1[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
             $("#condition-1").text(data.list[4].weather[0].description.toUpperCase());
-            $("#temp-1").text("Temperature: " + data.list[4].main.temp + "°F");
+            $("#temp-1").text("Temperature: " + data.list[4].main.temp + symbol);
             $("#humidity-1").text("Humidity: " + data.list[4].main.humidity + "%");
             $("#wind-1").text("Wind Speed: " + data.list[4].wind.speed + "mph");
 
@@ -304,7 +311,7 @@ function getApi(event) {
             $("#date-2").text(dateArray2[1] + " / " + dateArray2[2] + ", " + dateArray2[0]);
             $("#weather-icon-2").attr("src","https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png");
             $("#condition-2").text(data.list[12].weather[0].description.toUpperCase());
-            $("#temp-2").text("Temperature: " + data.list[12].main.temp + "°F");
+            $("#temp-2").text("Temperature: " + data.list[12].main.temp + symbol);
             $("#humidity-2").text("Humidity: " + data.list[12].main.humidity + "%");
             $("#wind-2").text("Wind Speed: " + data.list[12].wind.speed + "mph");
 
@@ -312,7 +319,7 @@ function getApi(event) {
             $("#date-3").text(dateArray3[1] + " / " + dateArray3[2] + ", " + dateArray3[0]);
             $("#weather-icon-3").attr("src","https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png");
             $("#condition-3").text(data.list[20].weather[0].description.toUpperCase());
-            $("#temp-3").text("Temperature: " + data.list[20].main.temp + "°F");
+            $("#temp-3").text("Temperature: " + data.list[20].main.temp + symbol);
             $("#humidity-3").text("Humidity: " + data.list[20].main.humidity + "%");
             $("#wind-3").text("Wind Speed: " + data.list[20].wind.speed + "mph");
 
@@ -320,7 +327,7 @@ function getApi(event) {
             $("#date-4").text(dateArray4[1] + " / " + dateArray4[2] + ", " + dateArray4[0]);
             $("#weather-icon-4").attr("src","https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png");
             $("#condition-4").text(data.list[28].weather[0].description.toUpperCase());
-            $("#temp-4").text("Temperature: " + data.list[28].main.temp + "°F");
+            $("#temp-4").text("Temperature: " + data.list[28].main.temp + symbol);
             $("#humidity-4").text("Humidity: " + data.list[28].main.humidity + "%");
             $("#wind-4").text("Wind Speed: " + data.list[28].wind.speed + "mph");
 
@@ -328,7 +335,7 @@ function getApi(event) {
             $("#date-5").text(dateArray5[1] + " / " + dateArray5[2] + ", " + dateArray5[0]);
             $("#weather-icon-5").attr("src","https://openweathermap.org/img/w/" + data.list[36].weather[0].icon + ".png");
             $("#condition-5").text(data.list[36].weather[0].description.toUpperCase());
-            $("#temp-5").text("Temperature: " + data.list[36].main.temp + "°F");
+            $("#temp-5").text("Temperature: " + data.list[36].main.temp + symbol);
             $("#humidity-5").text("Humidity: " + data.list[36].main.humidity + "%");
             $("#wind-5").text("Wind Speed: " + data.list[36].wind.speed + "mph"); 
 
@@ -351,6 +358,10 @@ function getApi(event) {
 // To retrieve updated weather data from search history
 function refreshWeather(event) {
 
+    // Selects the chosen temp unit
+    var unit = $("#system").val();
+    var symbol = $("#system option:selected").attr("data-unit");
+
     startSearch.play();
     $("#warning-1").hide();
     $("#warning-2").hide();
@@ -370,7 +381,7 @@ function refreshWeather(event) {
 
 
 
-    var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
+    var getCurrentUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=" + unit +"&appid=7df7243f5169b46433ea853892fbb930";
 
         // Displays weather boxes
         $("#current-weather-container").show();
@@ -389,16 +400,16 @@ function refreshWeather(event) {
             $("#today").text(weatherDate);
             $("#weather-icon").attr("src","https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $("#condition").text(data.weather[0].description.toUpperCase());
-            $("#temp").text("Temperature: " + data.main.temp + "°F");
-            $("#feel").text("Feels Like: " + data.main.feels_like + "°F");
-            $("#temp-max").text("High: " + data.main.temp_max + "°F");
-            $("#temp-min").text("Low: " + data.main.temp_min + "°F");
+            $("#temp").text("Temperature: " + data.main.temp + symbol);
+            $("#feel").text("Feels Like: " + data.main.feels_like + symbol);
+            $("#temp-max").text("High: " + data.main.temp_max + symbol);
+            $("#temp-min").text("Low: " + data.main.temp_min + symbol);
             $("#wind").text("Wind Speed: " + data.wind.speed + "mph");
             $("#humidity").text("Humidity: " + data.main.humidity + "%")
         })
 
         // API request url for 5-day forecast
-        var getForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" +latitude + "&lon=" + longitude + "&units=imperial&appid=7df7243f5169b46433ea853892fbb930";
+        var getForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" +latitude + "&lon=" + longitude + "&units=" + unit + "&appid=7df7243f5169b46433ea853892fbb930";
 
         // GET request for 5-day forecast
         fetch(getForecastUrl)
@@ -428,7 +439,7 @@ function refreshWeather(event) {
             $("#date-1").text(dateArray1[1] + " / " + dateArray1[2] + ", " + dateArray1[0]);
             $("#weather-icon-1").attr("src","https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png");
             $("#condition-1").text(data.list[4].weather[0].description.toUpperCase());
-            $("#temp-1").text("Temperature: " + data.list[4].main.temp + "°F");
+            $("#temp-1").text("Temperature: " + data.list[4].main.temp + symbol);
             $("#humidity-1").text("Humidity: " + data.list[4].main.humidity + "%");
             $("#wind-1").text("Wind Speed: " + data.list[4].wind.speed + "mph");
 
@@ -436,7 +447,7 @@ function refreshWeather(event) {
             $("#date-2").text(dateArray2[1] + " / " + dateArray2[2] + ", " + dateArray2[0]);
             $("#weather-icon-2").attr("src","https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png");
             $("#condition-2").text(data.list[12].weather[0].description.toUpperCase());
-            $("#temp-2").text("Temperature: " + data.list[12].main.temp + "°F");
+            $("#temp-2").text("Temperature: " + data.list[12].main.temp + symbol);
             $("#humidity-2").text("Humidity: " + data.list[12].main.humidity + "%");
             $("#wind-2").text("Wind Speed: " + data.list[12].wind.speed + "mph");
 
@@ -444,7 +455,7 @@ function refreshWeather(event) {
             $("#date-3").text(dateArray3[1] + " / " + dateArray3[2] + ", " + dateArray3[0]);
             $("#weather-icon-3").attr("src","https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png");
             $("#condition-3").text(data.list[20].weather[0].description.toUpperCase());
-            $("#temp-3").text("Temperature: " + data.list[20].main.temp + "°F");
+            $("#temp-3").text("Temperature: " + data.list[20].main.temp + symbol);
             $("#humidity-3").text("Humidity: " + data.list[20].main.humidity + "%");
             $("#wind-3").text("Wind Speed: " + data.list[20].wind.speed + "mph");
 
@@ -452,7 +463,7 @@ function refreshWeather(event) {
             $("#date-4").text(dateArray4[1] + " / " + dateArray4[2] + ", " + dateArray4[0]);
             $("#weather-icon-4").attr("src","https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png");
             $("#condition-4").text(data.list[28].weather[0].description.toUpperCase());
-            $("#temp-4").text("Temperature: " + data.list[28].main.temp + "°F");
+            $("#temp-4").text("Temperature: " + data.list[28].main.temp + symbol);
             $("#humidity-4").text("Humidity: " + data.list[28].main.humidity + "%");
             $("#wind-4").text("Wind Speed: " + data.list[28].wind.speed + "mph");
 
@@ -460,7 +471,7 @@ function refreshWeather(event) {
             $("#date-5").text(dateArray5[1] + " / " + dateArray5[2] + ", " + dateArray5[0]);
             $("#weather-icon-5").attr("src","https://openweathermap.org/img/w/" + data.list[36].weather[0].icon + ".png");
             $("#condition-5").text(data.list[36].weather[0].description.toUpperCase());
-            $("#temp-5").text("Temperature: " + data.list[36].main.temp + "°F");
+            $("#temp-5").text("Temperature: " + data.list[36].main.temp + symbol);
             $("#humidity-5").text("Humidity: " + data.list[36].main.humidity + "%");
             $("#wind-5").text("Wind Speed: " + data.list[36].wind.speed + "mph");
 

@@ -7,6 +7,8 @@ Simply enter the city and select the state from the drop-down menu, and you'll b
 
 Once you've successfully searched for a city, that city will be listed under "Recently Searched", and can be accessed in the future for its updated weather by clicking. The "Clear List" button allows users to clear their search history and repopulate a new list.
 
+The Unit select menu allows users to choose between Fahrenheit and Celsius for the temperature display, and they can switch anytime by changing the option when searching for a new city or before clicking on one of the cities on the "Recently Searched" list.
+
 There's also a clock in the middle of the page for users to check the date and time. It also has a countdown sound effect that beeps on the hour. 
 
 At the bottom of the page is a "Back to Top" button for users to be taken back to the top of the webpage for another search. 
@@ -21,6 +23,7 @@ Here's a screenshot of the webpage:
 ![image](Assets/Screenshot-1.png)
 ![image](Assets/Screenshot-2.png)
 ![image](Assets/Screenshot-3.png)
+
 
 ## Installation
 
