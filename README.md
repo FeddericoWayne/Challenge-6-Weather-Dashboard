@@ -1,4 +1,4 @@
-# Challenge 6: Weather Dashboard
+# Weather Dashboard
 
 ## Description
 
