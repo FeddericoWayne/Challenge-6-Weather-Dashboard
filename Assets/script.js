@@ -49,9 +49,12 @@ var searchHistory = localStorage.getItem("searchHistory") || "";
 // If search history is empty
 if (searchHistory === "") {
     $("#empty-list").show();
+    $("#clear-history").hide();
 
 } else {
     $("#empty-list").hide();
+    $("#clear-history").show();
+
 }
 
 var searchHistoryArray = searchHistory.split("?");
@@ -65,6 +68,10 @@ $("#forecast-container").hide();
 $("#warning-1").hide();
 $("#warning-2").hide();
 $("#warning-3").hide();
+
+// Hides back-to-top button
+$("#back").hide();
+
 
 
 // Loops through previously searched city and displays as an unordered list
@@ -165,6 +172,8 @@ function getApi(event) {
             $("#warning-1").hide();
             $("#warning-2").hide();
             $("#warning-3").hide();
+            $("#back").show();
+            $("#clear-history").show();
 
         }
 
@@ -367,6 +376,7 @@ function refreshWeather(event) {
     $("#warning-2").hide();
     $("#warning-3").hide();
     $("#empty-list").hide();
+    $("#back").show();
     $("#city-label").attr("class","");
     $("#state-label").attr("class","");
     $('#search-city').val("");
