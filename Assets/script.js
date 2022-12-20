@@ -15,6 +15,7 @@ function type() {
 
 $("#search-city").on("focus",type);
 $("#state").on("focus",type);
+$("#system").on("focus",type);
 
 // Back to top button
 $("#back").on("click",function() {

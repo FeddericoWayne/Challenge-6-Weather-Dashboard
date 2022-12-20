@@ -26,6 +26,16 @@ html {
     font-family: 'Varela Round', sans-serif;
 }
 
+/* Title styling */
+#title {
+    margin: 10px auto;
+    width: fit-content;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--stone) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 /* Background styling */
 body {
 
@@ -62,13 +72,12 @@ header {
     align-content: center;
     margin: 0px auto;
     margin-bottom: 20px;
-    color: white;
-    background-color: var(--dark);
+    background-color: var(--muted);
     font-size: 1.2rem;
     text-align: center;
     width: 95%;
     padding: 15px 0px;
-    border: 10px solid var(--muted);
+    border: 10px solid var(--dark);
     border-radius: 15px;
 }
 
